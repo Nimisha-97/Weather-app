@@ -31,7 +31,7 @@ pipeline{
         
         stage ('Sonar Analysis'){
             steps{
-                sh 'npm run sonar'
+                sh 'cd weather;npm run sonar;'
             }
         }
        
