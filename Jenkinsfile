@@ -60,7 +60,7 @@ pipeline{
                withCredentials([file(credentialsId: 'deployment-server', variable: 'secret_key_for_tomcat')]) {
                  sh 'scp -i ${secret_key_for_tomcat} -o StrictHostKeyChecking=no weather-${BUILD_NUMBER}.zip ubuntu@18.188.202.13:~/'
                   sh 'ssh -i ${secret_key_for_tomcat} -o StrictHostKeyChecking=no ubuntu@18.188.202.13 "cd ~;mkdir weather-${BUILD_NUMBER};unzip weather-${BUILD_NUMBER}.zip -d ./weather-${BUILD_NUMBER};"'
-                  sh 'ssh -i ${secret_key_for_tomcat} -o StrictHostKeyChecking=no ubuntu@18.188.202.13 "cd ~;cd weather-${BUILD_NUMBER};cd weather;ls;npm install;pip install -r requirements.txt;pm2 restart "python_api";"'
+                  sh 'ssh -i ${secret_key_for_tomcat} -o StrictHostKeyChecking=no ubuntu@18.188.202.13 "cd ~;cd weather-${BUILD_NUMBER};cd weather;ls;pip install -r requirements.txt;pm2 restart "python_api";"'
                //sh 'ssh -i ${secret_key_for_tomcat} ubuntu@18.224.182.74 "cd ~;cd weather;cd weather;pm2 list;"'
                }
             }
