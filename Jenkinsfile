@@ -58,7 +58,7 @@ pipeline{
         stage ('Deploy') {
             steps {
                withCredentials([file(credentialsId: 'deployment-server', variable: 'secret_key_for_tomcat')]) {
-                 sh 'scp -i ${secret_key_for_tomcat} weather-${BUILD_NUMBER}.zip ubuntu@18.224.182.74:~/'
+                 sh 'scp -i ${secret_key_for_tomcat} weather-${BUILD_NUMBER}.zip ubuntu@18.188.202.13:~/'
                   sh 'ssh -i ${secret_key_for_tomcat} ubuntu@18.188.202.13 "cd ~;unzip weather-${BUILD_NUMBER}.zip;"'
                   sh 'ssh -i ${secret_key_for_tomcat} ubuntu@18.188.202.13 "cd ~;cd weather-${BUILD_NUMBER};npm install;pip install -r requirements.txt;pm2 restart "python api";"'
                //sh 'ssh -i ${secret_key_for_tomcat} ubuntu@18.224.182.74 "cd ~;cd weather;cd weather;pm2 list;"'
