@@ -25,7 +25,7 @@ pipeline{
         
         stage ('Test'){
             steps{
-               sh 'python tests.py'
+               sh 'cd weather;python tests.py;'
             }
         }
         
