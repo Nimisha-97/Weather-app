@@ -29,6 +29,7 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "dotenv": "^6.2.0"
+    "dotenv": "^6.2.0",
+    "sonarqube-scanner": "^2.5.0" 
   }
 }
