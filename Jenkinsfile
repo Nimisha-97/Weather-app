@@ -31,7 +31,7 @@ pipeline{
         
         stage ('Sonar Analysis'){
             steps{
-                sh 'cd weather;npm run sonar;'
+                sh 'cd weather;npm install sonarqube-scanner --save-dev;npm run sonar;'
             }
         }
        
