@@ -30,11 +30,17 @@ pipeline{
                   }
          }
         
-        /*stage ('Test'){
+        stage ('Build'){
+            steps{
+               sh 'cd weather;npm run build;'
+            }
+        }
+        
+        stage ('Test'){
             steps{
                sh 'cd weather;python tests.py;'
             }
-        }*/
+        }
         
         stage ('Sonar Analysis'){
             steps{
@@ -45,7 +51,7 @@ pipeline{
             stage ('zip'){
                steps
                {
-                 sh 'zip -r weather-${BUILD_NUMBER}.zip ./weather -x *node_modules*'
+                 sh 'zip -r weather-${BUILD_NUMBER}.zip ./weather -x *node_modules* -x *build*'
             }
         }
        stage ( 'Artifact to Nexus')
