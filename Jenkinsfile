@@ -26,7 +26,7 @@ pipeline{
           stage ('dependencies'){
          steps{
              sh 'cd weather;pip install -r requirements.txt;'
-             sh 'cd weather;npm install;'
+             //sh 'cd weather;npm install;'
                   }
          }
         
@@ -44,7 +44,7 @@ pipeline{
         
         stage ('Sonar Analysis'){
             steps{
-                sh 'cd weather;npm run sonar;'
+                sh 'cd weather;npm install sonarqube-scanner --save-dev;npm run sonar;'
             }
         }
        
