@@ -23,11 +23,11 @@ pipeline{
             }
         }*/
         
-        stage ('Test'){
+        /*stage ('Test'){
             steps{
                sh 'cd weather;python tests.py;'
             }
-        }
+        }*/
         
         stage ('Sonar Analysis'){
             steps{
