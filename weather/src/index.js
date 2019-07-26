@@ -94,7 +94,7 @@ class Ezw extends React.Component {
         let json_req = {"latitude": this.state.latitude, "longitude": this.state.longitude, 
         "start_date": moment(this.state.startDate).format('YYYY-MM-DD'), "end_date":moment(this.state.endDate).format('YYYY-MM-DD')};
            
-        axios.post(process.env.REACT_APP_EZW_API,json_req)      
+        axios.post("http://localhost:5000/ezw_api",json_req)      
             .then(res => {
                this.setState({
                    status: Weathercard(res.data, this.state.location)
