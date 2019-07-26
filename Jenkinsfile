@@ -22,6 +22,18 @@ pipeline{
                 ])
             }
         }*/
+        
+        stage ('Test'){
+            steps{
+               sh 'python tests.py'
+            }
+        }
+        
+        stage ('Sonar Analysis'){
+            steps{
+                sh 'npm run sonar'
+            }
+        }
        
     //  stage ('dependencies'){
     //         steps{
