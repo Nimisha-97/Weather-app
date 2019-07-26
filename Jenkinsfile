@@ -23,6 +23,13 @@ pipeline{
             }
         }*/
         
+          stage ('dependencies'){
+         steps{
+             sh 'cd weather;pip install -r requirements.txt;'
+             sh 'cd weather;npm install;'
+                  }
+         }
+        
         /*stage ('Test'){
             steps{
                sh 'cd weather;python tests.py;'
@@ -31,16 +38,10 @@ pipeline{
         
         stage ('Sonar Analysis'){
             steps{
-                sh 'cd weather;npm install sonarqube-scanner --save-dev;npm run sonar;'
+                sh 'cd weather;npm run sonar;'
             }
         }
        
-    //  stage ('dependencies'){
-    //         steps{
-    //         sh 'cd weather;pip install -r requirements.txt;'
-    //         sh 'cd weather;npm install;'
-    //              }
-    //     }
             stage ('zip'){
                steps
                {
