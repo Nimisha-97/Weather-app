@@ -23,13 +23,6 @@ pipeline{
             }
         }*/
         
-          stage ('dependencies'){
-         steps{
-             sh 'cd weather;pip install -r requirements.txt;'
-             //sh 'cd weather;npm install;'
-                  }
-         }
-        
         stage ('Build'){
             steps{
                sh 'cd weather;npm run build;'
@@ -51,7 +44,7 @@ pipeline{
             stage ('zip'){
                steps
                {
-                 sh 'zip -r weather-${BUILD_NUMBER}.zip ./weather -x *node_modules* -x *build*'
+                 sh 'zip -r weather-${BUILD_NUMBER}.zip ./weather -x *node_modules*'
             }
         }
        stage ( 'Artifact to Nexus')
@@ -66,8 +59,8 @@ pipeline{
             steps {
                withCredentials([file(credentialsId: 'deployment-server', variable: 'secret_key_for_tomcat')]) {
                  sh 'scp -i ${secret_key_for_tomcat} weather-${BUILD_NUMBER}.zip ubuntu@18.224.182.74:~/'
-                  sh 'ssh -i ${secret_key_for_tomcat} ubuntu@18.224.182.74 "cd ~;mkdir webapp unzip weather-${BUILD_NUMBER}.zip -d ./weather-${BUILD_NUMBER};"'
-                  sh 'ssh -i ${secret_key_for_tomcat} ubuntu@18.224.182.74 "cd ~;cd weather-${BUILD_NUMBER};pm2 stop python;cd weather-${BUILD_NUMBER};npm install;pip install -r requirements.txt;npm run build;pm2 start "python api.py";"'
+                  sh 'ssh -i ${secret_key_for_tomcat} ubuntu@18.188.202.13 "cd ~;unzip weather-${BUILD_NUMBER}.zip;"'
+                  sh 'ssh -i ${secret_key_for_tomcat} ubuntu@18.188.202.13 "cd ~;cd weather-${BUILD_NUMBER};npm install;pip install -r requirements.txt;pm2 restart "python api";"'
                //sh 'ssh -i ${secret_key_for_tomcat} ubuntu@18.224.182.74 "cd ~;cd weather;cd weather;pm2 list;"'
                }
             }
