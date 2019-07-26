@@ -44,7 +44,7 @@ pipeline{
             stage ('zip'){
                steps
                {
-                 sh 'zip -r weather-${BUILD_NUMBER}.zip -x *node_modules* ./weather'
+                 sh 'zip -r weather-${BUILD_NUMBER}.zip ./weather -x *node_modules*'
             }
         }
        stage ( 'Artifact to Nexus')
