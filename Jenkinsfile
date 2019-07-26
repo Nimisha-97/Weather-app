@@ -62,17 +62,17 @@ pipeline{
             }
             }
         }
-        /*stage ('Deploy') {
+        stage ('Deploy') {
             steps {
                withCredentials([file(credentialsId: 'deployment-server', variable: 'secret_key_for_tomcat')]) {
-                 //sh 'scp -i ${secret_key_for_tomcat} weather-${BUILD_NUMBER}.zip ubuntu@18.224.182.74:~/'
-                  //sh 'ssh -i ${secret_key_for_tomcat} ubuntu@18.224.182.74 "cd ~;unzip weather-${BUILD_NUMBER}.zip -d ./weather-${BUILD_NUMBER};"'
-                  //sh 'ssh -i ${secret_key_for_tomcat} ubuntu@18.224.182.74 "cd ~;cd weather-${BUILD_NUMBER};cd weather-${BUILD_NUMBER};npm install;pip install -r requirements.txt;npm run build;pm2 start "python api.py";"'
-               sh 'ssh -i ${secret_key_for_tomcat} ubuntu@18.224.182.74 "cd ~;cd weather;cd weather;pm2 list;"'
+                 sh 'scp -i ${secret_key_for_tomcat} weather-${BUILD_NUMBER}.zip ubuntu@18.224.182.74:~/'
+                  sh 'ssh -i ${secret_key_for_tomcat} ubuntu@18.224.182.74 "cd ~;unzip weather-${BUILD_NUMBER}.zip -d ./weather-${BUILD_NUMBER};"'
+                  sh 'ssh -i ${secret_key_for_tomcat} ubuntu@18.224.182.74 "cd ~;cd weather-${BUILD_NUMBER};pm2 stop python;cd weather-${BUILD_NUMBER};npm install;pip install -r requirements.txt;npm run build;pm2 start "python api.py";"'
+               //sh 'ssh -i ${secret_key_for_tomcat} ubuntu@18.224.182.74 "cd ~;cd weather;cd weather;pm2 list;"'
                }
             }
-        }*/
- }
+        }
+    }
     post {
         success {
              slackSend (color: '#00FF00', message: " SUCCESSFUL: Job '${JOB_NAME} [${BUILD_NUMBER}]' (${BUILD_URL})")
